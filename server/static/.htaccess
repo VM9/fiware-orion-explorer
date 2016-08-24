@@ -1,0 +1,7 @@
+php_value  upload_max_filesize  512M
+
+SetEnv no-gzip dont-vary
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

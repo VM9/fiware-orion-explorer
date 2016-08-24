@@ -1,8 +1,15 @@
 {
-    "name":"vm9/fiware-orion-explorer",
+    "name": "vm9/fiware-orion-explorer",
     "description": "A UI to Explore Orion Context Broker Entities",
-     "require": {
+    "require": {
         "php": "^5.6 || ^7.0",
-        "VM9/orion-explorer-php-frame-work":">=1.5.0"
-     }
+        "VM9/orion-explorer-php-frame-work": ">=1.5.1",
+        "slim/slim": "2.6.2",
+        "angular-ui/bootstrap": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Application\\": "lib/"
+        }
+    }
 }
