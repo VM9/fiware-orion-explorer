@@ -1,15 +1,32 @@
 {
     "name": "vm9/fiware-orion-explorer",
     "description": "A UI to Explore Orion Context Broker Entities",
+    "keywords": ["fiware", "orion", "context-broker", "orion-context-broker-ui"],
+    "version": "0.1.0",
+    "license": [
+        "LGPL-2.1",
+        "GPL-3.0+"
+    ],
+    "authors": [
+        {
+            "name": "Leonan Carvalho",
+            "email": "j.leonancarvalho@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/vm9/fiware-orion-explorer/issues"
+    },
     "require": {
         "php": "^5.6 || ^7.0",
         "VM9/orion-explorer-php-frame-work": ">=1.5.1",
-        "slim/slim": "2.6.2",
-        "angular-ui/bootstrap": "dev-master"
+        "slim/slim": "2.6.2"
     },
     "autoload": {
         "psr-0": {
             "Application\\": "lib/"
         }
+    },
+    "scripts": {
+        "pre-install-cmd": "npm install"
     }
 }

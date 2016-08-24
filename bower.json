@@ -1,0 +1,29 @@
+{
+    "org": "vm9",
+    "name": "fiware-orion-explorer",
+    "description": "A UI to Explore Orion Context Broker Entities",
+    "version": "0.1.0",
+    "keywords": ["fiware", "orion", "context-broker", "orion-context-broker-ui"],
+    "license": [
+        "LGPL-2.1",
+        "GPL-3.0+"
+    ],
+    "authors": "https://github.com/vm9/fiware-orion-explorer/graphs/contributors",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "private": true,
+    "dependencies": {
+        "angular": "~1.5.0",
+        "angular-route": "~1.5.0",
+        "angular-loader": "~1.5.0",
+        "angular-mocks": "~1.5.0",
+        "ui-leaflet": "^1.0.0",
+        "html5-boilerplate": "5.3.0"
+    }
+}
