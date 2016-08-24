@@ -5,5 +5,5 @@ Orion Explorer
 
 
 ´´´
-composer install
+composer install --no-dev
 ´´´
