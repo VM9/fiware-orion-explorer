@@ -82,6 +82,11 @@ angular.module('mainApp', [
                             url: "/help",
                             templateUrl: "app/partials/help.html"
                         })
+                        .state('legal', {
+                            title: "Legal Information",
+                            url: "/legal",
+                            templateUrl: "app/partials/help.html"
+                        })
 
                         ;
 
