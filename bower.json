@@ -14,6 +14,7 @@
         "**/.*",
         "node_modules",
         "bower_components",
+        "./lib/.bower_components",
         "test",
         "tests"
     ],
@@ -24,6 +25,6 @@
         "angular-loader": "~1.5.0",
         "angular-mocks": "~1.5.0",
         "ui-leaflet": "^1.0.0",
-        "html5-boilerplate": "5.3.0"
+        "material-design-lite": "1.2.0"
     }
 }

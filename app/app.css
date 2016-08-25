@@ -1,30 +1,48 @@
-/* app css stylesheet */
+/*@import "bower_components/html5-boilerplate/dist/css/normalize.css";*/
+/*@import "bower_components/html5-boilerplate/dist/css/main.css";*/
+/*@import "style/sunburst.css";*/
+@import "bower_components/material-design-lite/material.min.css";
+/*@import "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en";*/
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+html {
+    font-family: 'Neo Tech Medium', trebuchet ms, verdana;
+}
+
+#view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+}
 
 .menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
 }
 
 .menu:before {
-  content: "[";
+    content: "[";
 }
 
 .menu:after {
-  content: "]";
+    content: "]";
 }
 
 .menu > li {
-  display: inline;
+    display: inline;
 }
 
 .menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+    content: "|";
+    padding-right: 0.3em;
 }
 
 .menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+    content: "";
+    padding: 0;
 }
