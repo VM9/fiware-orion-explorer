@@ -39,7 +39,7 @@ include_once './vendor/autoload.php';
                     </button>
                     <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
                         <li href='https://github.com/VM9/fiware-orion-explorer' _target='__blank' class="mdl-menu__item">About</li>
-                        <li ui-sref="help" class="mdl-menu__item">Help</li>
+                        <li ui-sref="help" class="mdl-menu__item">Help <i class="material-icons" role="presentation">help</i></li>
                         <li ui-sref="legal"  class="mdl-menu__item">Legal information</li>
                     </ul>
                 </div>
@@ -55,9 +55,6 @@ include_once './vendor/autoload.php';
                         <i class="material-icons" role="presentation">storage</i>
                         {{c.name}}
                     </a>
-
-                    <div class="mdl-layout-spacer"></div>
-                    <a class="mdl-navigation__link" ui-sref="help"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
                 </nav>
             </div>
             <main class="mdl-layout__content">
