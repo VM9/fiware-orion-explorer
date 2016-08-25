@@ -21,10 +21,15 @@
     "private": true,
     "dependencies": {
         "angular": "~1.5.0",
-        "angular-route": "~1.5.0",
         "angular-loader": "~1.5.0",
         "angular-mocks": "~1.5.0",
+        "angular-animate": "~1.5.0",
+        "angular-sanitize": "~1.5.0",
+        "angular-ui-router": "~0.3.1",
+        "angular-ui-bootstrap": "~2.1.2",
         "ui-leaflet": "^1.0.0",
-        "material-design-lite": "1.2.0"
+        "material-design-lite": "~1.2.0",
+        "dialog-polyfill": "~0.4.0",
+        "angular-material": "~1.1.0"
     }
 }

@@ -1,0 +1,107 @@
+<!-- Simple header with scrollable tabs. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" md-activate>
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">{{instance.name}}</span>
+
+            <div class="md-toolbar-tools">
+                <h2 flex="20">
+                    <span class="md-subheader">
+                        <b>Host </b>  {{instance.hostname}}:{{instance.port}} 
+                    </span>
+                    <span class="md-subheader"  ng-repeat="(key, value) in instance.info track by $index">
+                        <b>{{key}}</b> {{value}}<br>
+                    </span>
+                </h2>
+            </div>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="" class="mdl-layout__tab is-active">Entities Grid</a>
+            <a href="" class="mdl-layout__tab">Entities Map</a>
+            <a href="" class="mdl-layout__tab">Subscriptions</a>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+            <div class="page-content">
+
+                <div class="mdl-grid mdl-shadow--16dp mdl-grid--no-spacing">
+                    <div class="mdl-grid mdl-cell mdl-cell--2-col mdl-grid--no-spacing">
+                        <!--        <md-autocomplete  md-selected-item="instance.types"
+                                    md-search-text="searchText"
+                                    md-items="item in instance.types"
+                                    md-item-text="item.type"
+                                    md-min-length="0"
+                                    placeholder="Where are you flying from?">
+                                    <md-item-template>
+                                      <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.type}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                      No matches found for "{{searchText}}".
+                                    </md-not-found>
+                                  </md-autocomplete>
+                        -->
+
+                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric mdl-shadow--8dp">Entity Types</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="t in instance.types">
+                                    <td class="mdl-data-table__cell--non-numeric" ng-click="setType(t)" style="cursor: pointer">
+                                        <span class="mdl-badge" data-badge="{{t.count}}"> {{t.type}}
+                                            </a>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-grid--no-spacing">
+                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable " ng-show="selectedType !== null" style="max-width: 100%; overflow-x: scroll;"> 
+                            <thead>
+                                <tr>
+                                    <th><b>ID</b></th>
+                                    <th ng-repeat="(attr_name, attr) in selectedType.attrs track by $index" ng-class="{'mdl-data-table__cell--non-numeric': attr.types[0] == 'Integer' }">
+                                        {{attr_name}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in selectedType.data">
+                                    <td>
+                                        <b>{{data.id}}</b>
+                                    </td>
+                                    <td  ng-repeat="(attr_name, attr) in selectedType.attrs track by $index">
+                                        {{data[attr_name].value}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-4">
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-5">
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-6">
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+    </main>
+</div>
+
+
+

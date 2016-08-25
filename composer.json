@@ -27,6 +27,6 @@
         }
     },
     "scripts": {
-        "pre-install-cmd": "npm install"
+        "post-install-cmd": "npm install"
     }
 }
