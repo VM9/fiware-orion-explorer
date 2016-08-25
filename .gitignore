@@ -2,5 +2,4 @@
 /vendor/
 /composer.lock
 /app/bower_components/
-/lib/Application/
 /node_modules/
