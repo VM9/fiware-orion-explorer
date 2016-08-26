@@ -10,3 +10,4 @@ script:
   - composer install --no-dev
   - npm install
   - bower install
+  - php -S localhost:7000
