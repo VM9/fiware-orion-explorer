@@ -11,8 +11,5 @@
     "authors": "https://github.com/vm9/fiware-orion-explorer/graphs/contributors",
     "devDependencies": {
         "bower": "^1.7.7"
-    },
-    "scripts": {
-        "postinstall": "bower install"
     }
 }

@@ -14,7 +14,7 @@ dialog {
     top:0;
 }
 
-#view-source {
+#floating-button {
     position: fixed;
     display: block;
     right: 0;

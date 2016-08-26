@@ -17,7 +17,7 @@ include_once './vendor/autoload.php';
         <meta name="fragment" content="#!">
         <script src="app/bower_components/angular-loader/angular-loader.js"></script>
         <link rel="stylesheet" href="app/app.css">
-        <link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.2.0/material.teal-red.min.css" />
+        <link rel="stylesheet" href="//code.getmdl.io/1.2.0/material.cyan-blue.min.css" />
     </head>
     <body ng-cloak>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -44,14 +44,14 @@ include_once './vendor/autoload.php';
                     </ul>
                 </div>
             </header>
-            <div class="mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-                <span class="mdl-layout-title">
-                    <!--<img src="app/images/login-orion2.png"  />-->
+            <div class="mdl-layout__drawer mdl-color--blue-grey-500 mdl-color-text--white">
+                <span ui-sref="main" class="mdl-layout-title">
+                    <img src="app/images/logo.png"  />
                     <i>Explorer</i>
                 </span>
                 <nav class="mdl-navigation">
                     <span class="mdl-layout-title">Instances:</span>
-                    <a ng-repeat="c in connections" class="mdl-navigation__link " ui-sref="explore({id: $index})">
+                    <a ng-repeat="c in connections" class="mdl-navigation__link mdl-color--primary" ui-sref="explore({id: $index})">
                         <i class="material-icons" role="presentation">storage</i>
                         {{c.name}}
                     </a>
@@ -62,8 +62,8 @@ include_once './vendor/autoload.php';
                     <div ui-view></div>
                 </div>
             </main>
-            <a ng-click="addConnection()" id="view-source" class="mdl-button mdl-js-button mdl-button--fab  mdl-button--raised mdl-js-ripple-effect  mdl-color-text--white mdl-button--primary"><i class="material-icons">add</i></a>
-        </div>
+                <a ng-click="addConnection()" id="view-source" class="mdl-button mdl-js-button mdl-button--fab  mdl-button--raised mdl-js-ripple-effect  mdl-color-text--white mdl-button--primary"><i class="material-icons">add</i></a>
+            </div>
 
 
         <!-- Dialogs -->

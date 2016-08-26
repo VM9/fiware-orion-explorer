@@ -37,6 +37,9 @@ angular.module('mainApp', [
                             templateUrl: "app/partials/explore.html",
                             controller: ['$rootScope', '$scope', '$http', '$stateParams',
                                 function ($rootScope, $scope, $http, $stateParams) {
+
+                                    $scope.selectedType = null;
+                                    $scope.index = $stateParams.id;
                                     $scope.instance = $rootScope.getConnections($stateParams.id);
                                     $scope.init = function () {
                                         $http.post('server/index.php/orion/check', $scope.instance)
@@ -52,29 +55,27 @@ angular.module('mainApp', [
                                                 }).error(function (e) {
 //                                        $scope.instance.types = [];
                                         });
-                                        
-                                        if($scope.selectedType != null){
-                                            console.log($scope.selectedType);
+
+                                        if ($scope.selectedType !== null) {
+                                            $scope.setType($scope.selectedType);
                                         }
                                     };
                                     $scope.init();
-                                    
-                                    $scope.selectedType = null;
-                                    
-                                    $scope.setType = function(type){
+
+                                    $scope.setType = function (type) {
                                         $scope.selectedType = type;
                                         $scope.selectedType.data = [];
-                                        
-                                         $http.post('server/index.php/orion/entities/' +type.type, $scope.instance)
+
+                                        $http.post('server/index.php/orion/entities/' + type.type, $scope.instance)
                                                 .success(function (e) {
                                                     $scope.selectedType.data = e;
                                                 }).error(function (e) {
 //                                        $scope.instance.info = {};
                                         });
-                                        
+
                                     };
-                                    
-                                    
+
+
                                 }]
                         })
                         .state('help', {
@@ -217,7 +218,7 @@ angular.module('mainApp', [
                     dialog.showModal();
                 };
 
-                $rootScope.editConnection = function (conID) {
+                $rootScope.editConnection = function ($index) {
                     $rootScope.conn = {
                         "mode": "Edit",
                         "hostname": "",
@@ -227,7 +228,8 @@ angular.module('mainApp', [
                             {name: "Fiware-Service", value: null},
                             {name: "Fiware-ServicePath", value: null},
                             {name: "X-Auth-Token", value: null}
-                        ]
+                        ],
+                        _index: $index
                     };
                     $rootScope.formenable = true;
                     dialog.showModal();
@@ -248,11 +250,18 @@ angular.module('mainApp', [
 
                 $rootScope.saveConnection = function () {
                     var conn = $rootScope.conn;
-
-                    switch (conn.mode) {
+                    var mode = conn.mode;
+                    delete conn.mode;
+                    switch (mode) {
                         case "New":
                             $rootScope.connections = $rootScope.getConnections();
                             $rootScope.connections.push(conn);
+                            break;
+                        case "Edit":
+                            var $index = conn._index;
+                            delete conn._index;
+                            $rootScope.connections = $rootScope.getConnections();
+                            $rootScope.connections[$index] = conn;
                             break;
                         default:
                             break;
@@ -265,7 +274,7 @@ angular.module('mainApp', [
 
                 $rootScope.cancelConnection = function () {
                     $rootScope.conn = {
-                        "mode": "New",
+                        "mode": null,
                         "hostname": "",
                         "port": 1026,
                         "name": "",
@@ -298,6 +307,5 @@ angular.module('mainApp', [
 
 
             }])
-
 
         ;

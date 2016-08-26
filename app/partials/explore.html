@@ -6,22 +6,36 @@
             <span class="mdl-layout-title">{{instance.name}}</span>
 
             <div class="md-toolbar-tools">
-                <h2 flex="20">
-                    <span class="md-subheader">
-                        <b>Host </b>  {{instance.hostname}}:{{instance.port}} 
-                    </span>
-                    <span class="md-subheader"  ng-repeat="(key, value) in instance.info track by $index">
-                        <b>{{key}}</b> {{value}}<br>
-                    </span>
-                </h2>
+                <a href="javascript:void(0)" class="mdl-button mdl-button--raised mdl-button--icon" ng-click="init">
+                    <i class="material-icons" role="presentation">refresh</i>
+                </a>
+                <a href="javascript:void(0)" class="mdl-button mdl-button--raised mdl-button--icon" ng-click="editConnection(index)">
+                    <i class="material-icons" role="presentation">edit</i>
+                </a>
+                <a class="mdl-button mdl-button--colored mdl-button--raised mdl-button--accent mdl-button--icon md-action"  ng-click="removeConnection(index)">
+                    <i class="material-icons" role="presentation">delete</i>
+                </a>
             </div>
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
             <a href="" class="mdl-layout__tab is-active">Entities Grid</a>
-            <a href="" class="mdl-layout__tab">Entities Map</a>
-            <a href="" class="mdl-layout__tab">Subscriptions</a>
+            <a href="javascript:void(0)" class="mdl-layout__tab">Entities Map</a>
+            <a href="javascript:void(0)" class="mdl-layout__tab">Subscriptions</a>
         </div>
+        <nav class="mdl-navigation">
+            <a ng-repeat="c in connections" class="mdl-navigation__link " ui-sref="explore({id: $index})">
+                <i class="material-icons" role="presentation">storage</i>
+                {{c.name}}
+            </a>
+
+
+
+
+            <a flex="20" ng-repeat="(key, value) in instance.info track by $index" style="float: right">
+                | <b>  {{key}}</b> {{value}}<br>
+            </a>
+        </nav>
     </header>
     <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
