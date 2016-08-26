@@ -13,7 +13,9 @@ angular.module('mainApp', [
             '$stateProvider',
             '$urlRouterProvider',
             '$compileProvider',
-            function ($locationProvider, $stateProvider, $urlRouterProvider, $compileProvider) {
+            '$provide',
+            '$httpProvider',
+            function ($locationProvider, $stateProvider, $urlRouterProvider, $compileProvider, $provide, $httpProvider) {
                 $locationProvider.hashPrefix('!');
 
 //                $locationProvider.html5Mode(!0).hashPrefix("!");
@@ -75,7 +77,10 @@ angular.module('mainApp', [
 
                                     };
 
-
+                                    $scope.$on('$OrionExplorerConnectionsChanged',function(e,connections){
+                                        $scope.instance = connections[$stateParams.id];
+                                        $scope.init();
+                                    });
                                 }]
                         })
                         .state('help', {
@@ -170,9 +175,37 @@ angular.module('mainApp', [
                     })());
                 }
 
+
+                // Intercept http calls.
+                $provide.factory('ErrorHttpInterceptor', [function () {
+                        return {
+                            'request': function (config) {
+                                if (/server/.test(config.url)) {
+                                    config.url = config.url + "?t=" + (new Date()).getTime();
+                                }
+                                return config;
+                            },
+                            'response': function (response) {
+                                return response;
+                            },
+                            // On request failure
+                            'requestError': function (rejection) {
+                                return rejection;
+                            },
+                            // On response failure
+                            'responseError': function (rejection) {
+                                return rejection;
+                            }
+                        };
+                    }]);
+
+                // Add the interceptor to the $httpProvider.
+                $httpProvider.interceptors.push('ErrorHttpInterceptor');
+
+
             }])
 
-        .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+        .run(['$rootScope', '$state', function ($rootScope, $state) {
                 console.log("%c APP STARTED ", ["background: black", "color: white", "font-size: 11px"].join(";"));
 
 
@@ -219,18 +252,9 @@ angular.module('mainApp', [
                 };
 
                 $rootScope.editConnection = function ($index) {
-                    $rootScope.conn = {
-                        "mode": "Edit",
-                        "hostname": "",
-                        "port": 1026,
-                        "name": "",
-                        "headers": [
-                            {name: "Fiware-Service", value: null},
-                            {name: "Fiware-ServicePath", value: null},
-                            {name: "X-Auth-Token", value: null}
-                        ],
-                        _index: $index
-                    };
+                    $rootScope.connections = $rootScope.getConnections();
+                    $rootScope.connections[$index]._index = $index;
+                    $rootScope.conn = $rootScope.connections[$index];
                     $rootScope.formenable = true;
                     dialog.showModal();
                 };
@@ -245,7 +269,8 @@ angular.module('mainApp', [
                 $rootScope.removeConnection = function ($index) {
                     $rootScope.connections = $rootScope.getConnections();
                     $rootScope.connections.splice($index, 1);
-                    $rootScope.saveConnections();
+                    $rootScope.saveConnections(false);
+                    $state.go('main');
                 };
 
                 $rootScope.saveConnection = function () {
@@ -266,9 +291,7 @@ angular.module('mainApp', [
                         default:
                             break;
                     }
-
-                    localStorage.setItem('connections', $rootScope.connections);
-                    $rootScope.saveConnections();
+                    $rootScope.saveConnections(true);
                     $rootScope.cancelConnection();//Clear editor
                 };
 
@@ -284,6 +307,7 @@ angular.module('mainApp', [
                             {name: "X-Auth-Token", value: null}
                         ]
                     };
+                    $rootScope.formenable = false;
                     dialog.close();
                 };
 
@@ -299,8 +323,11 @@ angular.module('mainApp', [
                 };
 
 
-                $rootScope.saveConnections = function () {
+                $rootScope.saveConnections = function (emit) {
                     localStorage.setItem('connections', JSON.stringify($rootScope.connections));
+                    if(emit){
+                        $rootScope.$broadcast("$OrionExplorerConnectionsChanged", $rootScope.connections);
+                    }
                 };
 
                 $rootScope.getConnections();

@@ -46,15 +46,16 @@ include_once './vendor/autoload.php';
             </header>
             <div class="mdl-layout__drawer mdl-color--blue-grey-500 mdl-color-text--white">
                 <span ui-sref="main" class="mdl-layout-title">
-                    <img src="app/images/logo.png"  />
+                    <img src="app/images/logo.png" style="margin-left: -33px;" />
+                    <i>Orion</i>
                     <i>Explorer</i>
                 </span>
                 <nav class="mdl-navigation">
-                    <span class="mdl-layout-title">Instances:</span>
                     <a ng-repeat="c in connections" class="mdl-navigation__link mdl-color--primary" ui-sref="explore({id: $index})">
                         <i class="material-icons" role="presentation">storage</i>
                         {{c.name}}
                     </a>
+                    <a ng-click="addConnection()" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">add</i> New</a>
                 </nav>
             </div>
             <main class="mdl-layout__content">
@@ -62,7 +63,6 @@ include_once './vendor/autoload.php';
                     <div ui-view></div>
                 </div>
             </main>
-                <a ng-click="addConnection()" id="view-source" class="mdl-button mdl-js-button mdl-button--fab  mdl-button--raised mdl-js-ripple-effect  mdl-color-text--white mdl-button--primary"><i class="material-icons">add</i></a>
             </div>
 
 
