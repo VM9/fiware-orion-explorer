@@ -6,6 +6,6 @@ Orion Explorer
 ```
 git clone https://github.com/VM9/fiware-orion-explorer.git
 cd fiware-orion-explorer
-composer install --no-dev
+npm install
 php -S localhost:7000
 ```
