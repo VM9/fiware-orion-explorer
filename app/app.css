@@ -3,7 +3,7 @@
 /*@import "style/sunburst.css";*/
 @import "bower_components/material-design-lite/material.min.css";
 /*@import "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en";*/
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "//fonts.googleapis.com/icon?family=Material+Icons";
 @import "bower_components/leaflet/dist/leaflet.css";
 @import "bower_components/angular-material/angular-material.min.css";
 

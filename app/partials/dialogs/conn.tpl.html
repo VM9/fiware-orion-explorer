@@ -1,0 +1,94 @@
+<div class="md-padding" id="popupContainer">
+    <div class="md-dialog-container">
+        <md-dialog aria-label="{{connection.mode}} Instance" layout-padding>
+            <form action="#" name="conn">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2>{{connection.mode}} Instance</h2>
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="cancel()">
+                            <md-icon  aria-label="Close dialog">highlight_off</md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+
+                <md-dialog-content>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="name" rows= "1" ng-model="connection.name" ng-required="true" md-autofocus/>
+                        <label class="mdl-textfield__label" for="username">Name</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="hostname" rows= "1" ng-model="connection.hostname" ng-required="true"/>
+                        <label class="mdl-textfield__label" for="hostname">Hostname / IP </label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="number" id="port"  pattern="-?[0-9]*(\.[0-9]+)?" ng-model="connection.port"/>
+                        <label class="mdl-textfield__label" for="port">Port</label>
+                        <span class="mdl-textfield__error">Input is not a number!</span>
+                    </div>
+                    <table class="mdl-data-table mdl-js-data-table">
+                        <caption>
+                            <h6>Custom Headers <a ng-click="addHeader()" class="mdl-button mdl-button--raised"><i class="material-icons">add</i></a></h6>
+
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Action</th>
+                                <th class="mdl-data-table__cell--non-numeric">Key</th>
+                                <th class="mdl-data-table__cell--non-numeric">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="h in connection.headers track by $index">
+                                <td>
+                                    <a ng-click="removeHeader($index)" class="mdl-button mdl-js-button mdl-button--fab  mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect"><i class="material-icons">remove</i></a>
+                                </td>
+                                <td>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                                        <input class="mdl-textfield__input" type="text" ng-model="h.name"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                                        <input class="mdl-textfield__input" type="text" ng-model="h.value"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-show="connection.headers.length == 0">
+                                <td colspan="3" style="text-align: center">
+                                    No custom headeres
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-dialog-content>
+
+                <md-dialog-actions layout="row">
+                    <span flex></span>
+                    <md-button ng-click="answer($event)" class="mdl-button--colored" >
+                        Save
+                    </md-button>
+                    <md-button ng-click="cancel($event)" class="mdl-button--accent">
+                        Cancel
+                    </md-button>
+                </md-dialog-actions>
+            </form>
+        </md-dialog>
+    </div>
+</div>
+
+<!--
+<dialog id="connection-modal" class="mdl-dialog mdl-cell--4-col-desktop  mdl-shadow--6dp" >
+    <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+        <h5 class="mdl-card__title-text"> {{connection.mode}} Instance</h5>
+    </div>
+    <div class="mdl-dialog__content mdl-grid  mdl-grid--no-spacing">
+        <div class="mdl-card__supporting-text">
+
+        </div>
+    </div>
+    <div class="mdl-dialog__actions" style="text-align: right;">
+        <button type="button" class="mdl-button mdl-button--raised mdl-button--colored" ng-click="saveConnection()">Save</button>
+        <button type="button" class="mdl-button mdl-button--raised mdl-button--accent close" ng-click="cancelConnection()">Cancel</button>
+    </div>
+</dialog>-->

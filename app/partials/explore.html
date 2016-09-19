@@ -6,13 +6,13 @@
             <span class="mdl-layout-title">{{instance.name}}</span>
 
             <div class="md-toolbar-tools">
-                <a style="background-color:  #00c853; margin-left: 0.1em" href="javascript:void(0)" class="mdl-button mdl-button--raised mdl-button--icon" ng-click="init()">
+                <a style="background-color:  #00c853; margin-left: 0.1em" href="javascript:void(0)" class="mdl-button mdl-button--raised mdl-button--icon" ng-click="init($event)">
                     <i class="material-icons" role="presentation">refresh</i>
                 </a>
-                <a style="background-color:  #01579b; margin-left: 0.1em" href="javascript:void(0)" class="mdl-button mdl-button--raised mdl-button--icon" ng-click="editConnection(index)">
+                <a style="background-color:  #01579b; margin-left: 0.1em" href="javascript:void(0)" class="mdl-button mdl-button--raised mdl-button--icon" ng-click="editConnection(index,$event)">
                     <i class="material-icons" role="presentation">edit</i>
                 </a>
-                <a style="background-color:  tomato; margin-left: 0.1em" class="mdl-button mdl-button--colored mdl-button--raised mdl-button--accent mdl-button--icon md-action"  ng-click="removeConnection(index)">
+                <a style="background-color:  tomato; margin-left: 0.1em" class="mdl-button mdl-button--colored mdl-button--raised mdl-button--accent mdl-button--icon md-action"  ng-click="removeConnection(index,$event)">
                     <i class="material-icons" role="presentation">delete</i>
                 </a>
                  <a flex="20" ng-repeat="(key, value) in instance.info track by $index" style="float: right">
@@ -65,7 +65,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-grid--no-spacing">
+                    <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-grid--no-spacing" style="max-width: 100%; overflow: scroll">
                         <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable " ng-show="selectedType !== null" style="max-width: 100%; overflow-x: scroll;"> 
                             <thead>
                                 <tr>

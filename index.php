@@ -16,8 +16,9 @@ include_once './vendor/autoload.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <meta name="fragment" content="#!">
         <script src="app/bower_components/angular-loader/angular-loader.js"></script>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+        <!--<link rel="stylesheet" href="//code.getmdl.io/1.2.0/material.cyan-blue.min.css" />-->
         <link rel="stylesheet" href="app/app.css">
-        <link rel="stylesheet" href="//code.getmdl.io/1.2.0/material.cyan-blue.min.css" />
     </head>
     <body ng-cloak>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -55,7 +56,7 @@ include_once './vendor/autoload.php';
                         <i class="material-icons" role="presentation">storage</i>
                         {{c.name}}
                     </a>
-                    <a ng-click="addConnection()" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">add</i> New</a>
+                    <a ng-click="addConnection($event)" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">add</i> New</a>
                 </nav>
             </div>
             <main class="mdl-layout__content">
@@ -63,12 +64,12 @@ include_once './vendor/autoload.php';
                     <div ui-view></div>
                 </div>
             </main>
-            </div>
+        </div>
 
 
         <!-- Dialogs -->
 
-        <!-- Connections -->
+<!--         Connections 
         <dialog id="connection-modal" class="mdl-dialog mdl-cell--4-col-desktop  mdl-shadow--6dp" >
             <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
                 <h5 class="mdl-card__title-text"> {{conn.mode}} Instance</h5>
@@ -133,7 +134,7 @@ include_once './vendor/autoload.php';
                 <button type="button" class="mdl-button mdl-button--raised mdl-button--accent close" ng-click="cancelConnection()">Cancel</button>
             </div>
         </dialog>
-
+-->
 
         <script>
             /*!
@@ -213,9 +214,11 @@ include_once './vendor/autoload.php';
                     'app/bower_components/angular-animate/angular-animate.min.js',
                     'app/bower_components/angular-material/angular-material.js',
                     'app/bower_components/angular-sanitize/angular-sanitize.min.js',
+//                    'app/bower_components/angular-touch/angular-touch.min.js',
                     'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                     //                            'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                     'app/bower_components/leaflet/dist/leaflet.js',
+                    'app/bower_components/es5-shim/es5-shim.min.js',
                     'app/app.js',
                     'app/components/directives.js',
                     'app/components/filters.js'], function () {

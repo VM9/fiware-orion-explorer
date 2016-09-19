@@ -74,6 +74,11 @@ function OrionInstance($ServerAddress, $port, $headers = []) {
 $app->group('/orion', function () use($app) {
 
         $params = json_decode($app->request()->getBody());
+        $rgx = "/(^127\.)|(^192\.168\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(localhost|localdomain|.local$)|(^::1$)|(^[fF][cCdD])/";
+        if (preg_match($rgx, (string) $params->hostname, $matches)) {
+            throw new \Exception('Sorry but we can give you access to our orion local instance, maybe a next time.');
+        }
+        
         $Orion = OrionInstance($params->hostname, $params->port, $params->headers);
 
 
