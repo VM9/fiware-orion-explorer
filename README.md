@@ -16,3 +16,13 @@ npm install bower -g
 bower install
 php -S localhost:7000
 ```
+
+### Orion Explorer Requeriments
+- PHP 5.6+ with cURl extention
+- Orion Explorer uses NGSIv2 API, so you must use with on a 1.2.0+ instance, we recommend use the latest stable version of [Fiware Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
+- Orion Explorer just use API to communicate with [Fiware Orion Context Broker](https://github.com/telefonicaid/fiware-orion), the port just be visible for the Orion Explorer instance.
+
+
+### Licence
+Orion Context Explorer  is licensed under Affero General Public License (GPL) version 3.
+Orion Context Broker, Fiware ALL RIGHTS RESERVED AND OTHER TRADEMARKS ARE THE PROPERTY OF THEIR RESPECTIVE OWNERS. [Legal Notice](https://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/FI-WARE_Open_Specification_Legal_Notice_(implicit_patents_license))
