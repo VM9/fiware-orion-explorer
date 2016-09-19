@@ -19,6 +19,7 @@ php -S localhost:7000
 
 ### Orion Explorer Requeriments
 - PHP 5.6+ with cURl extention
+- Orion Explorer uses localstorage, and more recent version of javascript, css, and html, you should run it over a modern browser.
 - Orion Explorer uses NGSIv2 API, so you must use with on a 1.2.0+ instance, we recommend use the latest stable version of [Fiware Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
 - Orion Explorer just use API to communicate with [Fiware Orion Context Broker](https://github.com/telefonicaid/fiware-orion), the port just be visible for the Orion Explorer instance.
 
