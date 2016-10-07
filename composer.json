@@ -16,14 +16,26 @@
     "support": {
         "issues": "https://github.com/vm9/fiware-orion-explorer/issues"
     },
+    "repositories":[
+      {
+          "type":"git",
+          "url": "http://leonan:173489leo@vm9git.ddns.net/vm9/php-ngsi-cassandra-sink.git",
+          "version": "0.1.0"
+      }  
+    ],
     "require": {
         "php": "^5.6 || ^7.0",
         "VM9/orion-explorer-php-frame-work": ">=1.5.1",
-        "slim/slim": "2.6.2"
+        "slim/slim": "2.6.2",
+        "vm9/php-ngsi-cassandra-sink": "0.1.0"
     },
     "autoload": {
         "psr-0": {
             "Application\\": "lib/"
         }
+    },
+    "config": {
+        "secure-http": false,
+        "github-protocols": ["https","http", "ssh", "git"]
     }
 }
