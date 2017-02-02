@@ -20,21 +20,24 @@
     ],
     "private": true,
     "dependencies": {
-        "angular": "^1.5.x",
+        "angular": "~1.6.x",
         "json3": "^3.3.0",
         "es5-shim": "^4.0.0",
-        "angular-loader": "^1.5.x",
-        "angular-mocks": "^1.5.x",
-        "angular-animate": "^1.5.x",
-        "angular-sanitize": "^1.5.x",
-        "angular-touch": "^1.5.x",
-        "angular-aria": "^1.5.x",
-        "angular-ui-router": "~0.3.1",
-        "angular-ui-bootstrap": "~2.1.2",
+        "angular-loader": "~1.6.x",
+        "angular-mocks": "~1.6.x",
+        "angular-animate": "~1.6.x",
+        "angular-sanitize": "~1.6.x",
+        "angular-touch": "~1.6.x",
+        "angular-aria": "~1.6.x",
+        "angular-ui-router": "^0.3.1",
+        "angular-ui-bootstrap": "^2.1.2",
         "ui-leaflet": "^2.0.0",
-        "angular-simple-logger": "~0.1.5",
+        "angular-simple-logger": "^0.1.5",
         "material-design-lite": "~1.2.0",
         "dialog-polyfill": "~0.4.0",
         "angular-material": "1.1.1"
+    },
+    "resolutions": {
+        "angular": "~1.6.x"
     }
 }
