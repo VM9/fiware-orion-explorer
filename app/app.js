@@ -48,17 +48,17 @@ angular.module('mainApp', [
                                     $scope.instance = $rootScope.getConnections($stateParams.id);
                                     $scope.init = function () {
                                         $http.post('server/index.php/orion/check', $scope.instance)
-                                                .success(function (e) {
+                                                .then(function (e) {
                                                     console.log(e);
-                                                    $scope.instance.info = e;
-                                                }).error(function (e) {
+                                                    $scope.instance.info = e.data;
+                                                }).catch(function (e) {
 //                                        $scope.instance.info = {};
                                         });
 
                                         $http.post('server/index.php/orion/types', $scope.instance)
-                                                .success(function (e) {
-                                                    $scope.instance.types = e;
-                                                }).error(function (e) {
+                                                .then(function (e) {
+                                                    $scope.instance.types = e.data;
+                                                }).catch(function (e) {
 //                                        $scope.instance.types = [];
                                         });
 
@@ -74,9 +74,9 @@ angular.module('mainApp', [
                                         switch ($scope.tabSelected){
                                             case 'main':
                                                 $http.post('server/index.php/orion/entities/' + type.type, $scope.instance)
-                                                    .success(function (e) {
-                                                        $scope.selectedType.data = e;
-                                                    }).error(function (e) {
+                                                    .then(function (e) {
+                                                        $scope.selectedType.data = e.data;
+                                                    }).catch(function (e) {
 //                                        $scope.instance.info = {};
                                             });
                                             break;
@@ -173,10 +173,10 @@ angular.module('mainApp', [
                                     };
                                     //Get entities in geojson format
                                     $scope.setEntityMap = function (type) {
-                                        $http.post("server/index.php/orion/geoentities/" + type, $scope.instance).success(function (data, status) {
+                                        $http.post("server/index.php/orion/geoentities/" + type, $scope.instance).then(function (data, status) {
                                             angular.extend($scope.map, {
                                                 geojson: {
-                                                    data: data,
+                                                    data: data.data,
                                                     style: {
                                                         fillColor: "green",
                                                         weight: 2,
@@ -213,8 +213,8 @@ angular.module('mainApp', [
                                     //Subscriptions
                                     $scope.Subscriptions = [];
                                     $scope.setEntitySubscription = function(type){//by type not implemented
-                                        $http.post("server/index.php/orion/subscription", $scope.instance).success(function (data, status) {
-                                            $scope.Subscriptions = data;
+                                        $http.post("server/index.php/orion/subscription", $scope.instance).then(function (data, status) {
+                                            $scope.Subscriptions = data.data;
                                         });
                                     };
                                 }]
