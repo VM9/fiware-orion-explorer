@@ -96,7 +96,7 @@
                             <thead>
                                 <tr>
                                     <th><b>ID</b></th>
-                                    <th ng-repeat="(attr_name, attr) in Subscriptions[0] track by $index" class="mdl-data-table__cell--non-numeric">
+                                    <th ng-repeat="(attr_name, attr) in Subscriptions[0] track by $index" ng-if="attr_name != 'id'" class="mdl-data-table__cell--non-numeric">
                                         {{attr_name}}
                                     </th>
                                 </tr>
