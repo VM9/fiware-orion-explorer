@@ -52,3 +52,10 @@ dialog {
     content: "";
     padding: 0;
 }
+
+li > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+        
+}
