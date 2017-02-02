@@ -144,9 +144,9 @@ angular.module('mainApp', [
                                             'init': function () {
                                                 console.log('subs init', $scope.instance);
                                                 $scope.Subscriptions = [];
-                                                if ($scope.selectedType) {
-                                                    $scope.setEntitySubscription($scope.selectedType.type);
-                                                }
+//                                                if ($scope.selectedType) {
+                                                    $scope.setEntitySubscription();
+//                                                }
                                             }
                                         }
                                     };
@@ -212,8 +212,8 @@ angular.module('mainApp', [
                                     
                                     //Subscriptions
                                     $scope.Subscriptions = [];
-                                    $scope.setEntitySubscription = function(type){
-                                        $http.post("server/index.php/orion/subscription/" + type, $scope.instance).success(function (data, status) {
+                                    $scope.setEntitySubscription = function(type){//by type not implemented
+                                        $http.post("server/index.php/orion/subscription", $scope.instance).success(function (data, status) {
                                             $scope.Subscriptions = data;
                                         });
                                     };
