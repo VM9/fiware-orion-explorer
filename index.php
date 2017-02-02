@@ -40,9 +40,9 @@ include_once './vendor/autoload.php';
                         <i class="material-icons">more_vert</i>
                     </button>
                     <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                        <li href='https://github.com/VM9/fiware-orion-explorer' _target='__blank' class="mdl-menu__item">About</li>
-                        <li ui-sref="help" class="mdl-menu__item">Help <i class="material-icons" role="presentation">help</i></li>
-                        <li ui-sref="legal"  class="mdl-menu__item">Legal information</li>
+                        <li class="mdl-menu__item"><a  href='https://github.com/VM9/fiware-orion-explorer' target='_blank'> About </a></li>
+                        <li class="mdl-menu__item"><a  href='https://github.com/VM9/fiware-orion-explorer/issues' target='_blank' > Help <i class="material-icons" role="presentation">help</i> </a></li>
+                        <li class="mdl-menu__item"><a  href='https://github.com/VM9/fiware-orion-explorer#licence'  target='_blank' > Legal information</a></li>
                     </ul>
                 </div>
             </header>
