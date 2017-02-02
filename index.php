@@ -41,8 +41,8 @@ include_once './vendor/autoload.php';
                     </button>
                     <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
                         <li href='https://github.com/VM9/fiware-orion-explorer' _target='__blank' class="mdl-menu__item">About</li>
-                        <li ui-sref="help" class="mdl-menu__item">Help <i class="material-icons" role="presentation">help</i></li>
-                        <li ui-sref="legal"  class="mdl-menu__item">Legal information</li>
+                        <li href='https://github.com/VM9/fiware-orion-explorer/issues' _target='__blank'  lass="mdl-menu__item">Help <i class="material-icons" role="presentation">help</i></li>
+                        <li  href='https://github.com/VM9/fiware-orion-explorer#licence'  _target='__blank' class="mdl-menu__item">Legal information</li>
                     </ul>
                 </div>
             </header>
