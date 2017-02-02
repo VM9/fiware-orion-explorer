@@ -7,8 +7,10 @@ angular.module('mainApp', [
     'ngAnimate',
 //    'ngTouch',
     'ui.router',
-    'ngMaterial'
+    'ngMaterial',
 //    'ui.bootstrap'
+    'nemLogging',
+    'ui-leaflet'
 ])
         .config(['$locationProvider',
             '$stateProvider',
@@ -38,8 +40,8 @@ angular.module('mainApp', [
                             title: "Instance Viewer",
                             url: "/explore/:id",
                             templateUrl: "app/partials/explore.html",
-                            controller: ['$rootScope', '$scope', '$http', '$stateParams',
-                                function ($rootScope, $scope, $http, $stateParams) {
+                            controller: ['$rootScope', '$scope', '$http', '$stateParams', '$timeout', 'leafletData',
+                                function ($rootScope, $scope, $http, $stateParams, $timeout, leafletData) {
 
                                     $scope.selectedType = null;
                                     $scope.index = $stateParams.id;
@@ -69,13 +71,24 @@ angular.module('mainApp', [
                                     $scope.setType = function (type) {
                                         $scope.selectedType = type;
                                         $scope.selectedType.data = [];
-
-                                        $http.post('server/index.php/orion/entities/' + type.type, $scope.instance)
-                                                .success(function (e) {
-                                                    $scope.selectedType.data = e;
-                                                }).error(function (e) {
+                                        switch ($scope.tabSelected){
+                                            case 'main':
+                                                $http.post('server/index.php/orion/entities/' + type.type, $scope.instance)
+                                                    .success(function (e) {
+                                                        $scope.selectedType.data = e;
+                                                    }).error(function (e) {
 //                                        $scope.instance.info = {};
-                                        });
+                                            });
+                                            break;
+                                            case  'map':
+                                                $scope.setEntityMap(type.type);
+                                            break;
+                                            case 'subscriptions':
+                                                $scope.setEntitySubscription(type.type);
+                                            break;
+                                            default:
+                                            break;
+                                        }
 
                                     };
 
@@ -83,6 +96,127 @@ angular.module('mainApp', [
                                         $scope.instance = connections[$stateParams.id];
                                         $scope.init();
                                     });
+
+                                    $scope.tabSelected = 'main';
+                                    $scope.tabs = {
+                                        'main': {'init': function () {
+                                                $scope.init();
+                                            }},
+                                        'map': {
+                                            'init': function () {
+                                                console.log('maps init', $scope.instance);
+
+                                                $timeout(function () {
+                                                    var eventName = 'resize';
+                                                    if (angular.isFunction(window.dispatchEvent)) {
+                                                        window.dispatchEvent(new Event(eventName));
+                                                    } else {
+                                                        try {
+                                                            var event;
+                                                            if (document.createEvent) {
+                                                                event = document.createEvent('HTMLEvents');
+                                                                event.initEvent(eventName, true, true);
+                                                            } else if (document.createEventObject) {// IE < 9
+                                                                event = document.createEventObject();
+                                                                event.eventType = eventName;
+                                                            }
+                                                            event.eventName = eventName;
+                                                            if (el.dispatchEvent) {
+                                                                el.dispatchEvent(event);
+                                                            } else if (el.fireEvent && htmlEvents['on' + eventName]) {// IE < 9
+                                                                el.fireEvent('on' + event.eventType, event);// can trigger only real event (e.g. 'click')
+                                                            } else if (el[eventName]) {
+                                                                el[eventName]();
+                                                            } else if (el['on' + eventName]) {
+                                                                el['on' + eventName]();
+                                                            }
+                                                        } catch (e) {
+                                                            console.error(e);
+                                                        }
+                                                    }
+                                                }, 200, true);
+                                                if ($scope.selectedType) {
+                                                    $scope.setEntityMap($scope.selectedType.type);
+                                                }
+                                            }
+                                        },
+                                        'subscriptions': {
+                                            'init': function () {
+                                                console.log('subs init', $scope.instance);
+                                                $scope.Subscriptions = [];
+                                                if ($scope.selectedType) {
+                                                    $scope.setEntitySubscription($scope.selectedType.type);
+                                                }
+                                            }
+                                        }
+                                    };
+
+                                    $scope.selectTab = function (tab) {
+                                        if (!!$scope.tabs[tab]) {
+                                            $scope.tabSelected = tab;
+                                            $scope.tabs[tab].init();
+                                        }
+                                    };
+
+                                    //Map 
+
+                                    $scope.map = {
+                                        center: {//Get current location?
+                                            lat: 0,
+                                            lng: 0,
+                                            zoom: 4
+                                        },
+                                        defaults: {
+                                            scrollWheelZoom: false
+                                        },
+                                        geojson: {}
+                                    };
+                                    //Get entities in geojson format
+                                    $scope.setEntityMap = function (type) {
+                                        $http.post("server/index.php/orion/geoentities/" + type, $scope.instance).success(function (data, status) {
+                                            angular.extend($scope.map, {
+                                                geojson: {
+                                                    data: data,
+                                                    style: {
+                                                        fillColor: "green",
+                                                        weight: 2,
+                                                        opacity: 1,
+                                                        color: 'white',
+                                                        dashArray: '3',
+                                                        fillOpacity: 0.7
+                                                    }
+                                                }
+                                            });
+                                            $scope.centerJSON();
+                                        });
+                                    };
+                                    //Experimental center based by geojson
+                                    $scope.centerJSON = function () {
+                                        leafletData.getMap().then(function (map) {
+                                            var latlngs = [];
+                                            console.log($scope.map.geojson.data.features[0].geometry);
+                                            for (var i in $scope.map.geojson.data.features) {
+                                                var point =  $scope.map.geojson.data.features[i];                                                
+//                                                console.log(coord);
+//                                                for (var j in $scope.map.geojson.data.features[0].geometry.coordinates) {
+//                                                    var points = $scope.map.geojson.data.features[0].geometry.coordinates[j];
+//                                                    for (var k in points) {
+                                                        latlngs.push(L.GeoJSON.coordsToLatLng(point.geometry.coordinates));
+//                                                    }
+//                                                }
+                                            }
+//                                            console.log(latlngs);
+                                            map.fitBounds(latlngs);
+                                        });
+                                    };
+                                    
+                                    //Subscriptions
+                                    $scope.Subscriptions = [];
+                                    $scope.setEntitySubscription = function(type){
+                                        $http.post("server/index.php/orion/subscription/" + type, $scope.instance).success(function (data, status) {
+                                            $scope.Subscriptions = data;
+                                        });
+                                    };
                                 }]
                         })
                         .state('help', {
@@ -385,9 +519,9 @@ angular.module('mainApp', [
                 };
 
                 $scope.answer = function () {
-                    if(location.hostname === "orionexplorer.vm9it.com" && /(^127\.)|(^192\.168\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(localhost|localdomain|.local$)|(^::1$)|(^[fF][cCdD])/.test(""+$scope.connection.hostname)){
+                    if (location.hostname === "orionexplorer.vm9it.com" && /(^127\.)|(^192\.168\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(localhost|localdomain|.local$)|(^::1$)|(^[fF][cCdD])/.test("" + $scope.connection.hostname)) {
                         alert("Sorry but localhost instances aren't allowed here :( ");
-                    }else{
+                    } else {
                         $mdDialog.hide($scope.connection);
                     }
                 };

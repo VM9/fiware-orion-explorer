@@ -22,19 +22,19 @@
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href="" class="mdl-layout__tab is-active">Entities Grid</a>
-            <a href="javascript:void(0)" class="mdl-layout__tab">Entities Map</a>
-            <a href="javascript:void(0)" class="mdl-layout__tab">Subscriptions</a>
+            <a href="javascript:void(0)" ng-click="selectTab('main')" class="mdl-layout__tab is-active" ng-class="{'is-active':tabSelected == 'main'}">Entities Grid</a>
+            <a href="javascript:void(0)" ng-click="selectTab('map')"  class="mdl-layout__tab" ng-class="{'is-active':tabSelected == 'map'}">Entities Map</a>
+            <a href="javascript:void(0)" ng-click="selectTab('subscriptions')"  class="mdl-layout__tab"  ng-class="{'is-active':tabSelected == 'subscriptions'}">Subscriptions</a>
         </div>
         <nav class="mdl-navigation">
            
         </nav>
     </header>
     <main class="mdl-layout__content">
-        <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+        <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1" >
             <div class="page-content">
 
-                <div class="mdl-grid mdl-shadow--16dp mdl-grid--no-spacing">
+                <div class="mdl-grid mdl-shadow--16dp mdl-grid--no-spacing" >
                     <div class="mdl-grid mdl-cell mdl-cell--2-col mdl-grid--no-spacing">
                         <!--        <md-autocomplete  md-selected-item="instance.types"
                                     md-search-text="searchText"
@@ -65,7 +65,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-grid--no-spacing" style="max-width: 100%; overflow: scroll">
+                    <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-grid--no-spacing" style="max-width: 100%; overflow: scroll" ng-show="tabSelected == 'main'">
                         <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable " ng-show="selectedType !== null" style="max-width: 100%; overflow-x: scroll;"> 
                             <thead>
                                 <tr>
@@ -87,16 +87,45 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-grid--no-spacing" style="max-width: 100%; overflow: scroll" ng-show="tabSelected == 'map'">
+                        <leaflet ng-show="tabSelected == 'map'" lf-center="map.center" geojson="map.geojson" defaults="map.defaults" width="100%" height="480px"></leaflet>
+                        <h1>Not yet Implemented</h1>
+                    </div>
+                     <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-grid--no-spacing" style="max-width: 100%; overflow: scroll" ng-show="tabSelected == 'subscriptions'">
+                         <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable " ng-show="selectedType !== null && Subscriptions.length > 0" style="max-width: 100%; overflow-x: scroll;"> 
+                            <thead>
+                                <tr>
+                                    <th><b>ID</b></th>
+                                    <th ng-repeat="(attr_name, attr) in Subscriptions[0] track by $index" class="mdl-data-table__cell--non-numeric">
+                                        {{attr_name}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in Subscriptions">
+                                    <td  ng-repeat="(attr_name, attr) in Subscriptions[0] track by $index">
+                                        {{data[attr_name]}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h1>Not yet Implemented</h1>
+                    </div>
                 </div>
 
             </div>
         </section>
-        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
-            <div class="page-content"><!-- Your content goes here --></div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="scroll-tab-3">
-            <div class="page-content"><!-- Your content goes here --></div>
-        </section>
+<!--        <section class="mdl-layout__tab-panel" id="scroll-tab-2" ng-class="{'is-active':tabSelected == 'map'}">
+            <div class="page-content">
+                <leaflet ng-show="tabSelected == 'map'" lf-center="map.center" geojson="map.geojson" defaults="map.defaults" width="100%" height="580px"></leaflet>
+                <h1>Not yet Implemented</h1>
+            </div>
+        </section>-->
+<!--        <section class="mdl-layout__tab-panel" id="scroll-tab-3"  ng-class="{'is-active':tabSelected == 'subscriptions'}">
+            <div class="page-content">
+            <h1>Not yet Implemented</h1>            
+            </div>
+        </section>-->
         <section class="mdl-layout__tab-panel" id="scroll-tab-4">
             <div class="page-content"><!-- Your content goes here --></div>
         </section>

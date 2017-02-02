@@ -82,8 +82,19 @@ $app->group('/orion', function () use($app) {
         $Orion = OrionInstance($params->hostname, $params->port, $params->headers);
 
 
-    $app->any('/entities(/:type)', function($id, $type = false) use($Orion) {
+    $app->any('/entities(/:type)', function($type = false) use($Orion) {
         $retorno = $Orion->getEntities($type);
+        \Application\Util::PrintJson($retorno->get());
+    });
+    
+    $app->any('/geoentities(/:type)', function($type = false) use($Orion) {
+        $retorno = $Orion->getEntities($type);
+        \Application\Util::PrintJson($retorno->toGeoJson());
+    });
+    
+    $app->any('/subscription(/:type)', function($type = false) use($Orion) {
+        $Subscriptions = new Orion\Context\SubscriptionEntity($Orion);
+        $retorno =  $Subscriptions->getContext();
         \Application\Util::PrintJson($retorno->get());
     });
 

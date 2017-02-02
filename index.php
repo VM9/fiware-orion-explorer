@@ -17,6 +17,7 @@ include_once './vendor/autoload.php';
         <meta name="fragment" content="#!">
         <script src="app/bower_components/angular-loader/angular-loader.js"></script>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+        <link rel="stylesheet" href="//unpkg.com/leaflet@0.7.7/dist/leaflet.css">
         <!--<link rel="stylesheet" href="//code.getmdl.io/1.2.0/material.cyan-blue.min.css" />-->
         <link rel="stylesheet" href="app/app.css">
     </head>
@@ -206,7 +207,9 @@ include_once './vendor/autoload.php';
 
             // load angular before everyone
             $script([
-                'app/bower_components/angular/angular.min.js'
+                'app/bower_components/angular/angular.min.js',
+                //"//unpkg.com/leaflet@0.7.7/dist/leaflet.min.js",
+                'app/bower_components/leaflet/dist/leaflet.js'
             ], function () {
                 // load all of the dependencies asynchronously.
                 $script([
@@ -217,11 +220,13 @@ include_once './vendor/autoload.php';
 //                    'app/bower_components/angular-touch/angular-touch.min.js',
                     'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                     //                            'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
-                    'app/bower_components/leaflet/dist/leaflet.js',
                     'app/bower_components/es5-shim/es5-shim.min.js',
+                    'app/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js',
+                    "app/bower_components/ui-leaflet/dist/ui-leaflet.min.js",
                     'app/app.js',
                     'app/components/directives.js',
-                    'app/components/filters.js'], function () {
+                    'app/components/filters.js',
+    ], function () {
 
                     // when all is done, execute bootstrap angular application
                     angular.bootstrap(document, ['mainApp']);
