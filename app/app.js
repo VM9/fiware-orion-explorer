@@ -338,15 +338,19 @@ angular.module('mainApp', [
 
             }])
 
-        .run(['$rootScope', '$state', '$mdDialog', function ($rootScope, $state, $mdDialog) {
+        .run(['$rootScope', '$state', '$mdDialog', '$window', '$location', function ($rootScope, $state, $mdDialog, $window, $location) {
                 console.log("%c APP STARTED ", ["background: black", "color: white", "font-size: 11px"].join(";"));
 
-
+                if (!angular.isFunction($window.ga)) {
+                    $window.ga = window.ga = angular.noop; //fallback
+                }
+                
                 $rootScope.$on('$stateChangeSuccess', function (event, s, sp) {
                     $script([
                         'app/bower_components/material-design-lite/material.min.js'
                     ], function () {
                         $rootScope.pageTitle = s.title || s.name;
+                        $window.ga('send', 'pageview', $location.path());
                     });
                 });
 
