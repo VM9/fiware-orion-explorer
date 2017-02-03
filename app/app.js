@@ -104,8 +104,6 @@ angular.module('mainApp', [
                                             }},
                                         'map': {
                                             'init': function () {
-                                                console.log('maps init', $scope.instance);
-
                                                 $timeout(function () {
                                                     var eventName = 'resize';
                                                     if (angular.isFunction(window.dispatchEvent)) {
@@ -142,7 +140,6 @@ angular.module('mainApp', [
                                         },
                                         'subscriptions': {
                                             'init': function () {
-                                                console.log('subs init', $scope.instance);
                                                 $scope.Subscriptions = [];
 //                                                if ($scope.selectedType) {
                                                     $scope.setEntitySubscription();

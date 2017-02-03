@@ -65,6 +65,9 @@ include_once './vendor/autoload.php';
                     <div ui-view></div>
                 </div>
             </main>
+            <footer>
+                
+            </footer>
         </div>
 
 
@@ -236,5 +239,15 @@ include_once './vendor/autoload.php';
 
         <script src="app/bower_components/material-design-lite/material.min.js" async></script>
         <script src="app/bower_components/dialog-polyfill/dialog-polyfill.js" async></script>
+        <?php 
+            /**
+            *  Google Analytics Tracking Code
+            *  Only for https://orionexplorer.vm9it.com 
+            * 
+            */
+            if($_SERVER['HTTP_HOST'] == 'orionexplorer.vm9it.com'){
+                include_once 'analyticstracking.php';
+            }
+        ?>
     </body>
 </html>
