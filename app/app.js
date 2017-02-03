@@ -403,6 +403,12 @@ angular.module('mainApp', [
                                 $rootScope.connections = $rootScope.getConnections();
                                 $rootScope.connections.push(answer);
                                 $rootScope.saveConnections(true);
+                                $window.ga('send', {
+                                        hitType: 'event',
+                                        eventCategory: 'newConnection',
+                                        eventAction: answer.name + ' ' +  answer.hostname, //Only host name and name
+                                        eventLabel: 'ok'
+                                    });
                             }, function () {
                                 $rootScope.cancelConnection();//Clear editor
                             });
