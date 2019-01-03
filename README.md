@@ -9,6 +9,7 @@ This demo is gently hosted by VM9 IT, but we can't garantee that it will be avai
 ### Running:
 To download all dependencies you should install [composer](https://getcomposer.org/), [Node(npm)](https://nodejs.org/en/download/) and [Bower](https://bower.io/#install-bower).
 
+
 ```
 git clone https://github.com/VM9/fiware-orion-explorer.git
 cd fiware-orion-explorer
@@ -17,6 +18,14 @@ npm install
 npm install bower -g
 bower install
 php -S localhost:7000
+```
+
+### Runnning on Docker
+If you use docker-compose, you can run this tool on docker as below:
+
+```
+docker-compose up -d
+# Go to localhost:7000
 ```
 
 ### Orion Explorer Requeriments
