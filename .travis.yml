@@ -7,5 +7,6 @@ php:
 script:
   - composer install --no-dev
   - npm install
+  - npm install -g bower
   - bower install
 #  - php -S localhost:7000

@@ -1,0 +1,17 @@
+version: '3'
+services:
+  orion_explorer:
+    build: .
+    ports:
+      - "7000:7000"
+  orion:
+    image: fiware/orion:${ORION_VERSION:-1.15.1}
+    ports:
+      - "1026:1026"
+    command: -logLevel DEBUG -noCache -dbhost mongo
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:3.2
+    ports:
+      - "27017:27017"
